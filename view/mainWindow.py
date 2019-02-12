@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter.scrolledtext import *
-from controller.ctrl.CtrlKey import generate
+# from controller.ctrl.CtrlKey import generate NÃO FUNCIONOU!
+from controller.ctrl import CtrlKey
 
 
 class MainWindow(Tk):
@@ -31,7 +32,7 @@ class MainWindow(Tk):
         txtAreaPublicK = ScrolledText(frameGenKeys, width=40, height=6)
         txtAreaPublicK.grid(column=1, row=1)
         
-        btnKeyGen = Button(frameGenKeys, text='Generate Keys',  height=2,  command=generate(txtAreaPrivateK, txtAreaPublicK))
+        btnKeyGen = Button(frameGenKeys, text='Generate Keys',  height=2,  command=CtrlKey.generate(self,  txtAreaPrivateK, txtAreaPublicK))
         btnKeyGen.grid(row=2,  column=0,  pady=10)                
         btnKeyGen = Button(frameGenKeys, text='Clean keys',  height=2)
         btnKeyGen.grid(row=2,  column=1,  pady=10)
