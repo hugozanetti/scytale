@@ -1,4 +1,11 @@
+from tkinter import *
 from tkinter.scrolledtext import *
+import Crypto
+import Crypto.Random
+from Crypto.Hash import SHA
+from Crypto.PublicKey import RSA
+from Crypto.Signature import PKCS1_v1_5
+from Crypto.Cipher import PKCS1_OAEP
 
 class Key:
 
@@ -7,8 +14,9 @@ class Key:
         private_key = RSA.generate(1024, random_gen)
         public_key = private_key.publickey()
         
-        #visibleKey = binascii.hexlify(public_key.exportKey(format='DER')).decode('ascii')
-        #secretKey = binascii.hexlify(private_key.exportKey(format='DER')).decode('ascii')
+        secretKey = private_key.exportKey(format='DER')
+        visibleKey = public_key.exportKey(format='DER')
+        
 
         # Grava todas as chaves geradas pelo algorito RSA em um arquivo de texto
         with open("C:/Python/scytale/data/keysfile.txt", "a+") as f:
@@ -24,6 +32,6 @@ class Key:
             f.close()
 
         # Exibe o resultado na GUI
-        txtPrivKey.insert(INSERT, private_key.exportKey(format='DER'))
-        txtPubKey.insert(INSERT, public_key.exportKey(format='DER'))
+        txtPrivKey.insert(INSERT, secretKey)
+        txtPubKey.insert(INSERT, visibleKey)
         
